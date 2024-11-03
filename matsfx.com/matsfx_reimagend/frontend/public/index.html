@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Clone</title>
+    <style>
+        /* Base styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #121212;
+            color: white;
+        }
+
+        /* Layout */
+        .container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            height: 100vh;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            background: #000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .sidebar button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background: #282828;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Main content styles */
+        .main-content {
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        /* Player styles */
+        .player {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #282828;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Auth form styles */
+        .auth-form {
+            max-width: 300px;
+            margin: 100px auto;
+            padding: 20px;
+            background: #282828;
+            border-radius: 8px;
+        }
+
+        .auth-form input {
+            width: 100%;
+            margin: 10px 0;
+            padding: 12px;
+            background: #121212;
+            border: 1px solid #404040;
+            color: white;
+            border-radius: 4px;
+        }
+
+        .auth-form button {
+            width: 100%;
+            padding: 12px;
+            background: #1DB954;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Playlist styles */
+        .playlist-item {
+            padding: 15px;
+            margin: 5px 0;
+            background: #282828;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .playlist-item:hover {
+            background: #383838;
+        }
+
+        /* Song item styles */
+        .song-item {
+            padding: 15px;
+            margin: 5px 0;
+            background: #282828;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .song-item:hover {
+            background: #383838;
+        }
+
+        .song-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Upload area styles */
+        .upload-area {
+            padding: 20px;
+            border: 2px dashed #404040;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        /* Playlist selector styles */
+        .playlist-selector {
+            margin: 20px 0;
+            padding: 10px;
+            background: #282828;
+            border-radius: 4px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            background: #121212;
+            color: white;
+            border: 1px solid #404040;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- Login Form -->
+        <div id="loginForm" class="auth-form">
+            <h2>Login to Spotify Clone</h2>
+            <input type="email" id="loginEmail" placeholder="Email">
+            <input type="password" id="loginPassword" placeholder="Password">
+            <button onclick="login()">Login</button>
+            <p style="text-align: center;">Don't have an account? <span onclick="showSignup()" style="color: #1DB954; cursor: pointer;">Sign up</span></p>
+        </div>
+
+        <!-- Signup Form -->
+        <div id="signupForm" class="auth-form" style="display:none;">
+            <h2>Create Account</h2>
+            <input type="text" id="signupUsername" placeholder="Username">
+            <input type="email" id="signupEmail" placeholder="Email">
+            <input type="password" id="signupPassword" placeholder="Password">
+            <button onclick="register()">Sign Up</button>
+            <p style="text-align: center;">Already have an account? <span onclick="showLogin()" style="color: #1DB954; cursor: pointer;">Login</span></p>
+        </div>
+
+        <!-- Main App -->
+        <div id="mainApp" class="container" style="display:none;">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <h2>Your Library</h2>
+                <button onclick="createPlaylist()">Create Playlist</button>
+                
+                <div id="playlists">
+                    <!-- Playlists will be loaded here -->
+                </div>
+
+                <div class="upload-area">
+                    <h3>Upload Music</h3>
+                    <input type="file" id="musicUpload" accept="audio/*" onchange="uploadMusic(this.files[0])">
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <h1>Your Music</h1>
+                
+                <div class="playlist-selector">
+                    <select id="playlistSelect">
+                        <option value="">Select Playlist</option>
+                    </select>
+                </div>
+
+                <div id="songsList">
+                    <!-- Songs will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Player -->
+            <div class="player">
+                <audio id="audioPlayer" controls></audio>
+                <div id="nowPlaying"></div>
+                <div class="player-controls">
+                    <button onclick="previousSong()">Previous</button>
+                    <button onclick="nextSong()">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load the JavaScript -->
+    <script src="/app.js"></script>
+</body>
+</html>
