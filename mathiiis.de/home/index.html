@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="categories">
+            <button class="category-btn active" data-category="all">All</button>
+            <button class="category-btn" data-category="web">Web Apps</button>
+            <button class="category-btn" data-category="chat">Chat App</button>
+        </div>
+
+        <div class="featured-projects">
+            <div class="project-card" data-category="chat">
+                <img src="/api/placeholder/bloyid_preview_closed_beta.png" alt="Project 1">
+                <div class="project-preview">
+                    <h3>Bloyid</h3>
+                    <p>An open Source Chat App using Nodes.js and TypeScript.</p>
+                </div>
+            </div>
+            <div class="project-card" data-category="web">
+                <img src="/api/placeholder/pc_rater_preview.png" alt="Project 2">
+                <div class="project-preview">
+                    <h3>Pc Rater</h3>
+                    <p>Here you can rate, compare, and look how good your pc build is.</p>
+                </div>
+            </div>
+            <div class="project-card" data-category="web">
+                <img src="/api/placeholder/matsfx_com_preview_beta.png" alt="Project 3">
+                <div class="project-preview">
+                    <h3>&copy matSFX</h3>
+                    <p>matSFX is a free and ad-free alternive to Spotify.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-grid">
+            <!-- Projects here -->
+        </div>
+    </div>
+
+    <div class="project-iframe">
+        <button class="close-iframe">×</button>
+        <iframe width="100%" height="100%" frameborder="0"></iframe>
+    </div>
+
+    <script src="functions.js"></script>
+</body>
+</html>
