@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Server - Steady Bot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', path='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="navbar">
+                <div class="logo">Steady Bot</div>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('static', path='frontend/home/index.html') }}">Home</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </header>
+
+        <section class="content">
+            <h1 class="welcome-text"> Welcome <strong class="welcome-name">{{global_name}}</strong>, please select a Server to continue. </h1>
+            <ul class="server-list">
+                {% for guild in guilds %}
+                <li>
+                    <img src="{{ guild.icon }}" alt="{{ guild.name }}" class="server-icon">
+                    <a href="/dashboard/{{ guild.id }}"><strong>{{ guild.name }}</strong></a>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <footer class="footer">
+            <p>2024 Steady Bot</p>
+            <div class="footer-nav">
+                <a href="{{ url_for('static', path='frontend/home/pp.html') }}">Privacy Policy</a>
+                <a href="{{ url_for('static', path='frontend/home/tos.html') }}">Terms Of Service</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

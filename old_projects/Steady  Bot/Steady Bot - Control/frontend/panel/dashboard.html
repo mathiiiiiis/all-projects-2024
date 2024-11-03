@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guild Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Dashboard for Guild ID: {{ guild_id }}</h1>
+    <form action="/guilds/{{ guild_id }}/dashboard/save_commands" method="post">
+        <label>
+            <input type="checkbox" name="command1" {% if command_settings.command1 %}checked{% endif %}>
+            Enable Command 1
+        </label><br>
+        <label>
+            <input type="checkbox" name="command2" {% if command_settings.command2 %}checked{% endif %}>
+            Enable Command 2
+        </label><br>
+        <label>
+            <input type="checkbox" name="command3" {% if command_settings.command3 %}checked{% endif %}>
+            Enable Command 3
+        </label><br>
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

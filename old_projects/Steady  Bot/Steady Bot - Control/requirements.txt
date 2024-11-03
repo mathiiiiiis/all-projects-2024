@@ -1,0 +1,8 @@
+discord.py
+fastapi
+aiohttp
+jinja2
+uvicorn
+better-ipc
+ezcord
+aiosqlite

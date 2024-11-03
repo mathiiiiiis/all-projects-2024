@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steady Bot Control Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', path='styles.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <header class="header">
+            <div class="navbar">
+                <div class="logo">Steady Bot</div>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('static', path='frontend/home/index.html') }}">Home</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </header>
+
+        <section id="login-screen" class="hero">
+            <h1 class="hero-title">Please Log In to continue</h1>
+            <a href="{{ login_url }}" id="login-btn" class="hero-cta">Log In</a>
+            <br><br>
+        </section>
+
+        <footer class="footer">
+            <p>2024 Steady Bot</p>
+            <div class="footer-nav">
+                <a href="{{ url_for('static', path='frontend/home/pp.html') }}">Privacy Policy</a>
+                <a href="{{ url_for('static', path='frontend/home/tos.html') }}">Term Of Service</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
