@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Signup</title>
+    <link rel="stylesheet" href="registration.css">
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-box">
+            <!-- Login -->
+            <div id="login" class="form-content">
+                <h2>Login to Your Account</h2>
+                <form action="/login" method="POST">
+                    <div class="input-group">
+                        <input type="email" id="login-email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="login-password" name="password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Login</button>
+
+                    <div class="or-divider">OR</div>
+
+                    <button class="google-btn">Login with Google</button>
+
+                    <div class="redirect">
+                        <p>Don’t have an account? <span onclick="openForm('signup')">Sign up</span></p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Signup -->
+            <div id="signup" class="form-content" style="display: none;">
+                <h2>Create an Account</h2>
+                <form action="/signup" method="POST">
+                    <div class="input-group">
+                        <input type="email" id="signup-email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="signup-password" name="password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Sign Up</button>
+
+                    <div class="or-divider">OR</div>
+
+                    <button class="google-btn">Sign up with Google</button>
+
+                    <div class="redirect">
+                        <p>Already have an account? <span onclick="openForm('login')">Login</span></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // weiß nicht ob du das ändern möchtest
+        function openForm(formName) {
+            const forms = document.querySelectorAll('.form-content');
+            forms.forEach(form => form.style.display = 'none');
+            document.getElementById(formName).style.display = 'block';
+        }
+    </script>
+</body>
+</html>

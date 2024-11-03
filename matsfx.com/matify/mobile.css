@@ -1,0 +1,105 @@
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: fixed;
+        bottom: 90px;
+        left: 0;
+        right: 0;
+        z-index: 900;
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .nav-links {
+        display: flex;
+        margin-bottom: 0;
+    }
+
+    .nav-links li {
+        margin-bottom: 0;
+        margin-right: 20px;
+    }
+
+    .nav-links li:last-child {
+        margin-right: 0;
+    }
+
+    .nav-links a {
+        flex-direction: column;
+        align-items: center;
+        font-size: 12px;
+    }
+
+    .nav-links i {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    .main-content {
+        margin-bottom: 140px;
+        padding: 10px;
+    }
+
+    .player {
+        height: auto;
+        padding: 10px;
+        flex-wrap: wrap;
+    }
+
+    .now-playing, .player-controls, .volume-control {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .volume-control {
+        order: -1;
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 15px;
+    }
+
+    .search-modal-content {
+        width: 90%;
+        margin: 30% auto;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px;
+    }
+
+    .player {
+        padding: 5px;
+    }
+
+    .album-art {
+        width: 40px;
+        height: 40px;
+    }
+
+    .control-buttons button {
+        font-size: 18px;
+        padding: 5px;
+    }
+
+    .search-modal-content {
+        margin: 40% auto;
+    }
+}

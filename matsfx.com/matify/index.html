@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATSFX – Music for Everyone</title>
+    <meta name="description" content="matSFX – Your ad-free music platform for unlimited enjoyment. Discover pop, rock, rap, and more. Create your playlists and get weekly updates. Join now and experience music without compromises!">
+    <meta property="og:title" content="MATSFX – Music for Everyone">
+    <meta property="og:description" content="MATSFX – Your ad-free music platform for unlimited enjoyment. Discover pop, rock, rap, and more. Create your playlists and get weekly updates. Join now and experience music without compromises!">
+    <meta property="og:url" content="https://your-website-url.com/">
+    <meta property="og:image" content="https://matsfx.com/app-images/matsfx-banner.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://matsfx.com/app-images/matsfx-logo.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="player.css">
+    <link rel="stylesheet" href="mobile.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>MATSFX</h2>
+            <ul class="nav-links">
+                <li><a href="#home" onclick="showPage('home')">Home</a></li>
+                <li><a href="#profile" onclick="showPage('profile')">Profile</a></li>
+                <li><a href="#search" onclick="showPage('search')">Search</a></li>
+                <li><a href="#library" onclick="showPage('library')">Your Library</a></li>
+            </ul>
+            <h3>Playlists</h3>
+            <ul id="playlist-list" class="nav-links">
+                <!-- Playlists will be dynamically created here -->
+            </ul>
+            <button onclick="createPlaylist()">Create Playlist</button>
+            <div class="nertivia-button">
+                <img src="/app-images/nertivia-logo-blue-white.png" alt="Nertivia Logo" class="nertivia-logo">
+                <a href="https://nertivia.com/i/K9TU2p" class="nertivia-link">Join our Nertivia Server, today!</a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content" id="main-content">
+            <!-- Content will dynamically appear here -->
+        </div>
+    </div>
+
+    <!-- Player -->
+    <div class="player">
+        <img id="player-album-art" src="/music-cover/default.png" alt="Album Art" class="album-art">
+        <div class="song-info">
+            <h3 id="songTitle">No Song playing</h3>
+            <p id="artistName">Unknown Artist</p>
+        </div>
+        <div class="controls">
+            <button onclick="previousTrack()"><i class="fas fa-step-backward"></i></button>
+            <button onclick="playPause()" id="playPauseBtn"><i class="fas fa-play"></i></button>
+            <button onclick="nextTrack()"><i class="fas fa-step-forward"></i></button>
+        </div>
+        <div class="progress-container">
+            <span id="currentTime">0:00</span>
+            <input type="range" id="progress" value="0" max="100">
+            <span id="duration">0:00</span>
+        </div>
+        <div class="volume-control">
+            <i class="fas fa-volume-up"></i>
+            <input type="range" id="volume" min="0" max="1" step="0.1" value="1">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
