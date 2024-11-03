@@ -1,0 +1,47 @@
+/* Styles for the icons with custom classes */
+.blicon.icon1 {
+    stroke: blue;  /* Change stroke color for icon1 */
+  }
+  
+  .blicon.icon2 {
+    stroke: green; /* Change stroke color for icon2 */
+  }
+  
+  /* Add hover effect */
+  .blicon.icon1:hover {
+    fill: yellow; /* Change fill color on hover */
+  }
+  
+  .blicon.icon2:hover {
+    transform: scale(1.2); /* Scale up on hover */
+    transition: transform 0.3s ease;
+  }
+  
+  /* Add any additional animations you want */
+  .blicon.icon1.rotate {
+    animation: rotate 2s linear infinite;
+  }
+  
+  .blicon.icon2.pulse {
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  
+  /* Keyframes for animations */
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+  }
+  

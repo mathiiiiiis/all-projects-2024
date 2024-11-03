@@ -1,0 +1,455 @@
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #111111;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #6a90f9, #4e73f8);
+    border-radius: 10px;
+    border: none;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
+    animation: scrollPulse 2s infinite ease-in-out;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    transform: scale(1.2);
+}
+
+::-webkit-scrollbar-thumb:active {
+    transform: scale(1.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+    background: linear-gradient(to bottom, #1a1a1a, #2d2d2d);
+    color: white;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 80px 0;
+}
+
+.logo {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 30px;
+    animation: rotateLogo 4s ease-in-out infinite;
+}
+
+.logo svg {
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes rotateLogo {
+    0% { transform: rotate(-20deg); }
+    50% { transform: rotate(30deg); }
+    100% { transform: rotate(-20deg); }
+}
+
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    animation: slideIn 0.8s ease-out;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #bebebe;
+    margin-bottom: 30px;
+    animation: slideIn 0.8s ease-out 0.2s backwards;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Beta Counter Style */
+.countdown-popup {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(to right, rgba(30, 35, 50, 0.95), rgba(45, 55, 70, 0.95));
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(85, 95, 110, 0.4);
+    border-radius: 12px;
+    padding: 24px 48px;
+    z-index: 1000;
+    color: white;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    animation: slideDown 0.5s ease forwards;
+  }
+  
+  countdown-timer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  
+  countdown-timer > span {
+    --bg-color: rgba(40, 45, 60, 0.9);
+    --padding: 8px;
+    --border-radius: 8px;
+    --min-width: 80px;
+    --display: inline-flex;
+    --align-items: center;
+    --justify-content: center;
+    --border: 1px solid rgba(100, 110, 125, 0.2);
+    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .countdown-content {
+    --display: flex;
+    --flex-direction: column;
+    --align-items: center;
+    --gap: 24px;
+  }
+  
+  .beta-text {
+    font-size: 1em;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .beta-text small {
+    display: block;
+    margin-top: 8px;
+  }
+  
+  .beta-text a {
+    color: rgb(167, 139, 250);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: rgba(167, 139, 250, 0.1);
+  }
+  
+  .beta-text a:hover {
+    color: rgb(196, 181, 253);
+    background: rgba(167, 139, 250, 0.2);
+  }
+  
+  .countdown-popup .close {
+    position: absolute;
+    right: 12px;
+    top: 21px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .countdown-popup .close:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  @keyframes slideDown {
+    from {
+      transform: translate(-50%, -100%);
+      opacity: 0;
+    }
+    to {
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
+  }
+  
+
+/* Error Message Container */
+.error-popup {
+    position: fixed;
+    top: 20px;
+    right: -400px;
+    width: 360px;
+    background: #ec3e3e;
+    color: white;
+    padding: 16px 20px;
+    border-radius: 8px;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.1),
+        0 12px 28px rgba(0, 0, 0, 0.2);
+    transform: translateX(0) translateY(-10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: 
+        transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity 0.35s ease,
+        visibility 0.35s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.error-popup::before {
+    content: '⚠️';
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+.error-popup .message {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-right: 24px;
+}
+
+.error-popup .close-btn {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 8px;
+    border: none;
+    color: white;
+    opacity: 0.8;
+    cursor: pointer;
+    background: none;
+    font-size: 18px;
+    line-height: 1;
+    transition: opacity 0.2s ease;
+}
+
+.error-popup .close-btn:hover {
+    opacity: 1;
+}
+
+.error-popup.show {
+    transform: translateX(-420px) translateY(0);
+    opacity: 1;
+    visibility: visible;
+    animation: subtle-bounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes subtle-bounce {
+    0% {
+        transform: translateX(0) translateY(-10px);
+        opacity: 0;
+    }
+    50% {
+        transform: translateX(-430px) translateY(0);
+    }
+    100% {
+        transform: translateX(-420px) translateY(0);
+    }
+}
+
+/* Buttons */
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 60px;
+    animation: slideIn 0.8s ease-out 0.4s backwards;
+}
+
+.button {
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.button:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+.primary-button {
+    background: #3b82f6;
+    color: white;
+    border: none;
+}
+
+.primary-button:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+}
+
+.secondary-button {
+    border: 2px solid white;
+    color: white;
+}
+
+.secondary-button:hover {
+    background: white;
+    color: #1a1a1a;
+    transform: translateY(-2px);
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 80px;
+    transform: rotate(0);
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #3b82f6;
+    transform: rotate(-5deg);
+}
+
+/* Changelog */
+.changelog {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 80px;
+}
+
+.changelog h2 {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+}
+
+.release {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in, box-shadow 0.6s ease-in;
+}
+
+.release:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.release-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.release:hover {
+    transform: translateX(10px);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.version {
+    font-weight: 600;
+}
+
+.date {
+    color: #bebebe;
+}
+
+.changes {
+    list-style-position: inside;
+    color: #bebebe;
+}
+
+.changes li {
+    margin-bottom: 8px;
+}
+
+/* Footer */
+footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 30px 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-links {
+    display: flex;
+    gap: 30px;
+}
+
+.footer-links a {
+    color: #bebebe;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .error-popup {
+        width: calc(100% - 32px);
+        right: 16px;
+        transform: translateY(-10px);
+    }
+    
+    .error-popup.show {
+        transform: translateX(0) translateY(0);
+    }
+}
