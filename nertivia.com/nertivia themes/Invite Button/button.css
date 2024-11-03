@@ -1,0 +1,29 @@
+.nertivia-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #418cd3b4;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 8px;
+    margin-left: -4px;
+    margin-top: 360px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+    width: 80%;
+}
+.nertivia-link {
+    text-decoration: none;
+    color: white;
+}
+
+.nertivia-button:hover {
+    background-color: #008cff;
+}
+.nertivia-logo {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}

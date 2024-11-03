@@ -1,0 +1,7 @@
+help|List all available commands
+status|Check Bloyid server status
+ban|Ban a user|user:The user to ban:required|reason:Reason for the ban|duration:Ban duration in days
+kick|Kick a user|user:The user to kick:required|reason:Reason for the kick
+timeout|Timeout a user|user:The user to timeout:required|duration:Timeout duration in minutes:required|reason:Reason for the timeout
+createticket|Create a new ticket
+rules|Display server rules
