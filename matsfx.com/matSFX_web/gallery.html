@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>matSFX Archive</title>
+    <style>
+        :root {
+            --background: #121212;
+            --background-secondary: #1e1e1e;
+            --accent: #1db954;
+            --text: #ffffff;
+            --border: #424549;
+            --shadow: rgba(0, 0, 0, 0.7);
+            --folder-bg: #1e1e1e;
+            --folder-hover-bg: #2c2c2c;
+            --folder-border: #3f3f4f;
+            --button-bg: #333;
+            --button-hover-bg: #444;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: var(--text);
+            font-size: 3rem;
+            margin: 30px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            line-height: 1.2;
+        }
+
+        .archive {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            width: 96%;
+        }
+
+        .folder {
+            width: 250px;
+            height: 150px;
+            background-color: var(--folder-bg);
+            border: 2px solid var(--folder-border);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .folder:hover {
+            background-color: var(--folder-hover-bg);
+            box-shadow: 0 8px 20px var(--shadow);
+        }
+
+        .folder::before {
+            content: "";
+            position: absolute;
+            top: -15px;
+            left: 10px;
+            width: 80px;
+            height: 20px;
+            background-color: var(--folder-border);
+            border-radius: 10px 10px 0 0;
+        }
+
+        .folder h2 {
+            color: var(--text);
+            font-size: 1.2rem;
+            margin: 0;
+            letter-spacing: 0.05em;
+        }
+
+        .folder p {
+            color: var(--accent);
+            margin: 5px 0;
+            font-size: 1rem;
+        }
+
+        .fake-window {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 99%;
+            height: 100%;
+            background-color: var(--background-secondary);
+            z-index: 100;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .fake-window.active {
+            display: flex;
+        }
+
+        .fake-window-header {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--background-secondary);
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            color: var(--accent);
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+            gap: 20px;
+            padding: 20px;
+            width: 90%;
+        }
+
+        .gallery img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            cursor: pointer;
+            border-radius: 15px;
+            border: 2.5px solid var(--border);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        #fullscreen-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #fullscreen-img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 20px;
+            border: 2.5px solid var(--accent);
+            box-shadow: 0 0 40px var(--accent);
+        }
+
+        .file {
+            width: 150px;
+            height: 150px;
+            background-color: var(--folder-bg);
+            border: 2px solid var(--folder-border);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .file:hover {
+            background-color: var(--folder-hover-bg);
+            box-shadow: 0 8px 20px var(--shadow);
+        }
+
+        /* Text file window */
+        .text-file {
+            display: none;
+            position: fixed;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 600px;
+            background-color: var(--background-secondary);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .text-file.active {
+            display: block;
+        }
+
+        .text-file-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .text-file-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .text-file-header button {
+            padding: 5px 15px;
+            background-color: var(--button-bg);
+            color: var(--text);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .text-file-header button:hover {
+            background-color: var(--button-hover-bg);
+        }
+
+        .text-file-content {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .text-file-content pre,
+        .text-file-content textarea {
+            background-color: var(--folder-bg);
+            color: var(--text);
+            border: 2px solid var(--border);
+            padding: 10px;
+            font-size: 1rem;
+            font-family: monospace;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .text-file-content textarea {
+            resize: vertical;
+            max-height: 200px;
+        }
+
+        @media screen and (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .folder {
+                width: 200px;
+                height: 120px;
+            }
+
+            #fullscreen-img {
+                max-width: 95%;
+                max-height: 95%;
+            }
+
+            .text-file {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>matSFX Archive</h1>
+
+    <div class="archive" id="month-archive">
+        <div class="folder" onclick="openWindow('day-window-october-2024'); playClickSound();">
+            <h2>October 2024</h2>
+            <p>2 Items</p>
+        </div>
+    </div>
+
+    <div class="fake-window" id="day-window-october-2024">
+        <div class="fake-window-header" onclick="closeWindow('day-window-october-2024'); playClickSound();">← Back to Months</div>
+        <div class="archive" id="day-archive">
+            <div class="folder" onclick="openWindow('gallery-window-3rd-october'); playClickSound();">
+                <h2>3rd October 2024</h2>
+                <p>3 Files</p>
+            </div>
+            <div class="folder" onclick="openWindow('gallery-window-2nd-october'); playClickSound();">
+                <h2>2nd October 2024</h2>
+                <p>1 File</p>
+            </div>
+            <div class="folder" onclick="openWindow('gallery-window-1st-october'); playClickSound();">
+                <h2>1st October 2024</h2>
+                <p>4 Files</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="fake-window" id="gallery-window-3rd-october">
+        <div class="fake-window-header" onclick="closeWindow('gallery-window-3rd-october'); playClickSound();">← Back to Days</div>
+        <div class="gallery" id="gallery-container-3rd">
+            <img src="https://mathiiis.de/collage/Bild7.png" alt="3rd October" onclick="openFullscreen(this)">
+            <img src="https://mathiiis.de/collage/Bild8.png" alt="3rd October" onclick="openFullscreen(this)">
+            <img src="https://mathiiis.de/collage/Bild9.png" alt="3rd October" onclick="openFullscreen(this)">
+            <div class="file" onclick="openWindow('text-file-window'); playClickSound();">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Text-x-generic.svg" alt="text file" style="width: 50px; height: 50px;">
+                <h2>text.txt</h2>
+            </div>
+        </div>
+    </div>
+
+    <div id="fullscreen-container" onclick="closeFullscreen()">
+        <img id="fullscreen-img" src="" alt="Fullscreen Image">
+    </div>
+
+    <div class="text-file" id="text-file-window">
+        <div class="text-file-header">
+            <h2>Notes for 3rd October 2024</h2>
+            <button onclick="closeTextFile()">Close</button>
+        </div>
+        <div class="text-file-content">
+            <textarea placeholder="Write your tasks or things you did..."></textarea>
+        </div>
+    </div>
+
+    <audio id="click-sound" src="https://mathiiis.de/sound/mouse.wav"></audio>
+
+    <script>
+        function openWindow(windowId) {
+            document.getElementById(windowId).classList.add('active');
+        }
+
+        function closeWindow(windowId) {
+            document.getElementById(windowId).classList.remove('active');
+        }
+
+        function playClickSound() {
+            var clickSound = document.getElementById('click-sound');
+            clickSound.play();
+        }
+
+        function openFullscreen(img) {
+            var fullscreenContainer = document.getElementById('fullscreen-container');
+            var fullscreenImg = document.getElementById('fullscreen-img');
+            fullscreenImg.src = img.src;
+            fullscreenContainer.style.display = "flex";
+        }
+
+        function closeFullscreen() {
+            var fullscreenContainer = document.getElementById('fullscreen-container');
+            fullscreenContainer.style.display = "none";
+        }
+
+        function closeTextFile() {
+            document.getElementById('text-file-window').classList.remove('active');
+        }
+    </script>
+</body>
+</html>

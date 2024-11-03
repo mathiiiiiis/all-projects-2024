@@ -1,0 +1,133 @@
+:root {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --background: #121212;
+    --background-secondary: #1e1e1e;
+    --accent: #1db954;
+    --text: #ffffff;
+    overflow: hidden;
+}
+
+body {
+    position: absolute;
+    inset: 0;
+    padding: 0;
+    margin: 0;
+    background-color: var(--background);
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.center {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin: 0 2rem;
+}
+
+.accent {
+    color: var(--accent);
+}
+
+h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 0;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.socials {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem;
+    background-color: var(--background-secondary);
+    border-radius: 15px;
+    border: 1.5px solid #3f3f4f;
+    animation: appear 1.15s cubic-bezier(0.55, 0, 0.25, 0.95) forwards;
+}
+
+.social-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.bubble {
+    background-color: var(--accent);
+    color: var(--background);
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.bubble::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    border: 8px solid transparent;
+    border-top-color: var(--accent);
+    transform: translateX(-50%);
+}
+
+.social-item:hover .bubble {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-10px);
+}
+
+.socials a {
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.socials a:hover {
+    color: var(--accent);
+}
+
+.socials img, .socials svg {
+    width: 40px;
+    height: 40px;
+    transition: all 0.5s ease;
+}
+
+.socials img:hover {
+    filter: brightness(0) saturate(100%) invert(64%) sepia(14%) saturate(5757%) hue-rotate(92deg) brightness(91%) contrast(77%);
+}
+
+.socials svg path {
+    fill: var(--text);
+    transition: fill 0.3s ease;
+}
+
+.socials svg:hover path {
+    fill: var(--accent);
+}
+
+@keyframes appear {
+    from { bottom: -10rem; }
+    to { bottom: 1rem; }
+}
+
+@media screen and (max-width: 600px) {
+    h1 { font-size: 2.5rem; }
+    .socials { align-items: center; }
+    .social-item { margin-bottom: 1rem; }
+}
+
